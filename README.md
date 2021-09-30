@@ -1,7 +1,7 @@
-# hnt-miner-software
+# hnt-iot-software
 
 ### How to start
 
 ```bash
-./hummingbird_miner.sh
+./hummingbird_iot.sh
 ```
