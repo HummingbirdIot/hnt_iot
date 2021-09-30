@@ -39,6 +39,7 @@ function checkOriginUpdate() {
     exec sudo ./${SELF_NAME}
   fi
 }
+echo "test"
 echo ${SELF_NAME}
 checkOriginUpdate
 setupDbus
