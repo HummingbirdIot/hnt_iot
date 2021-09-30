@@ -3,9 +3,20 @@ VERSION=0.1
 SELF_NAME=`basename "$0"`
 
 function setupDbus() {
+  should_restart_dbus=false
   diff ./config/com.helium.Miner.conf /etc/dbus-1/system.d/com.helium.Miner.conf >/dev/null 2>&1
   if [ $? -ne 0 ];then
     sudo cp ./config/com.helium.Miner.conf /etc/dbus-1/system.d/com.helium.Miner.conf
+    should_restart_dbus=true
+  fi
+  diff ./config/com.helium.Config.conf.conf /etc/dbus-1/system.d/com.helium.Config.conf >/dev/null 2>&1
+  if [ $? -ne 0 ];then
+    sudo cp ./config/com.helium.Config.conf /etc/dbus-1/system.d/com.helium.Config.conf
+    should_restart_dbus=true
+    #sudo systemctl restart dbus
+  fi
+  if [ "$should_restart_dbus" = true ]; then
+    echo "restart dbus"
     sudo systemctl restart dbus
   fi
 }
