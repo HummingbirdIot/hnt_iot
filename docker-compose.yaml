@@ -13,6 +13,7 @@ services:
   helium-miner:
     image: "quay.io/team-helium/miner:latest-arm64"
     privileged: true
+    restart: always
     logging:
         driver: journald
     ulimits:
@@ -43,6 +44,7 @@ services:
     image: "hummingbirdiot/gateway-config:0.1.0"
     logging:
         driver: journald
+    restart: always
     privileged: true
     stdin_open: true
     tty: true
