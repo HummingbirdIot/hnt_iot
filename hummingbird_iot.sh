@@ -39,7 +39,6 @@ function checkOriginUpdate() {
     exec sudo ./${SELF_NAME}
   fi
 }
-echo "test for git update"
 echo ${SELF_NAME}
 checkOriginUpdate
 setupDbus

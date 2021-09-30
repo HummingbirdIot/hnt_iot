@@ -11,7 +11,7 @@ services:
       - "/dev/spidev0.0:/dev/spidev0.0"
       - "/dev/ttyAMA1:/dev/AMA1"
   helium-miner:
-    image: "quay.io/team-helium/miner:latest-arm64"
+    image: "quay.io/team-helium/miner:miner-arm64_2021.09.27.0_GA"
     privileged: true
     restart: always
     logging:
@@ -29,7 +29,7 @@ services:
       - '/var/run/dbus:/var/run/dbus'
       - '/var/data:/var/data'
       - 'pktfwdr:/var/pktfwd'
-      - './config/overlay/docker.config:/opt/miner/releases/2021.09.16.1/sys.config'
+      - './config/overlay/docker.config:/opt/miner/releases/2021.09.27.0/sys.config'
     cap_add:
       - SYS_RAWIO
     devices:
