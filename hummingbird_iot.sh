@@ -60,6 +60,8 @@ function checkOriginUpdate() {
 echo "test"
 echo ${SELF_NAME}
 checkOriginUpdate
+# unblock rfkill
+rfkill unblock all
 update_release_version
 setupDbus
 startHummingbird
