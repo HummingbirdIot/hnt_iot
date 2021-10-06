@@ -2,6 +2,13 @@
 VERSION=0.1
 SELF_NAME=`basename "$0"`
 
+function update_release_version() {
+  diff ./config/lsb_release /etc/lsb_release 2>&1
+  if [ $? -ne 0 ];then
+    sudo cp ./config/lsb_release /etc/lsb_release
+  fi
+}
+
 function setupDbus() {
   should_restart_dbus=false
   diff ./config/com.helium.Miner.conf /etc/dbus-1/system.d/com.helium.Miner.conf >/dev/null 2>&1
@@ -53,5 +60,6 @@ function checkOriginUpdate() {
 echo "test"
 echo ${SELF_NAME}
 checkOriginUpdate
+update_release_version
 setupDbus
 startHummingbird

@@ -54,6 +54,8 @@ services:
         hard: "64000"
     volumes:
       - '/var/run/dbus:/var/run/dbus'
+      - '/etc/lsb_release:/etc/lsb_release'
+      - '/var/data/public_keys:/var/data/public_keys'
 
 volumes:
   miner-storage:
