@@ -2,6 +2,11 @@
 VERSION=0.1
 SELF_NAME=`basename "$0"`
 
+function git_setup() {
+  git config --global user.email "hummingbirdiot@example.com"
+  git config --global user.name "hummingbirdiot"
+}
+
 function update_release_version() {
   diff ./config/lsb_release /etc/lsb_release >/dev/null 2>&1
   if [ $? -ne 0 ];then
@@ -57,8 +62,10 @@ function checkOriginUpdate() {
     exec sudo ./${SELF_NAME}
   fi
 }
-echo "test"
+
+echo ">>>>> hummingbirdiot start <<<<<<"
 echo ${SELF_NAME}
+git_setup
 checkOriginUpdate
 # unblock rfkill
 rfkill unblock all
