@@ -3,7 +3,7 @@ VERSION=0.1
 SELF_NAME=`basename "$0"`
 
 function update_release_version() {
-  diff ./config/lsb_release /etc/lsb_release 2>&1
+  diff ./config/lsb_release /etc/lsb_release >/dev/null 2>&1
   if [ $? -ne 0 ];then
     sudo cp ./config/lsb_release /etc/lsb_release
   fi
