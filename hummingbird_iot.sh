@@ -7,6 +7,10 @@ function git_setup() {
   git config --global user.name "hummingbirdiot"
 }
 
+function check_public_keyfile() {
+  sudo touch /var/data/public_keys
+}
+
 function update_release_version() {
   diff ./config/lsb_release /etc/lsb_release >/dev/null 2>&1
   if [ $? -ne 0 ];then
@@ -66,6 +70,7 @@ function checkOriginUpdate() {
 echo ">>>>> hummingbirdiot start <<<<<<"
 echo ${SELF_NAME}
 git_setup
+check_public_keyfile
 checkOriginUpdate
 # unblock rfkill
 rfkill unblock all

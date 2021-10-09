@@ -44,7 +44,7 @@ services:
     labels:
       io.balena.features.dbus: '1'
   gateway-config:
-    image: "hummingbirdiot/gateway-config:0.1.0"
+    image: "hummingbirdiot/gateway-config:0.1.13"
     logging:
         driver: journald
     network_mode: "host"
