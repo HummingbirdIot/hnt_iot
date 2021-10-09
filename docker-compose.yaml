@@ -24,9 +24,9 @@ services:
     expose:
       - "4467"
       - "1680"
-      - "41458"
-    ports:
-      - "44158:44158/tcp"
+      - "44158"
+        #ports:
+        #  - "44158:44158/tcp"
     volumes:
       - '/var/run/dbus:/var/run/dbus'
       - '/var/data:/var/data'
