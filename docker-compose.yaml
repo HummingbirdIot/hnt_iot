@@ -1,12 +1,14 @@
 version: '3'
 services:
   packet-forwarder:
-    image: "hummingbirdminer/hnt-pkt-fwd:0.1.0"
+    image: "hummingbirdiot/hnt-pkt-fwd:0.3.0"
     network_mode: "host"
     logging:
         driver: journald
     privileged: true
     restart: always
+    volumes:
+      - '/etc/hw_version:/etc/hw_version'
     devices:
       - "/dev/spidev0.0:/dev/spidev0.0"
       - "/dev/ttyAMA1:/dev/AMA1"
@@ -44,7 +46,7 @@ services:
     labels:
       io.balena.features.dbus: '1'
   gateway-config:
-    image: "hummingbirdiot/gateway-config:0.1.13"
+    image: "hummingbirdiot/gateway-config:0.1.14"
     logging:
         driver: journald
     network_mode: "host"
