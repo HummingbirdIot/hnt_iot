@@ -46,7 +46,7 @@ services:
     labels:
       io.balena.features.dbus: '1'
   gateway-config:
-    image: "hummingbirdiot/gateway-config:0.1.14"
+    image: "hummingbirdiot/gateway-config:0.1.19"
     logging:
         driver: journald
     network_mode: "host"
@@ -60,6 +60,7 @@ services:
         hard: "64000"
     volumes:
       - '/var/run/dbus:/var/run/dbus'
+      - '/var/lib/bluetooth:/var/lib/bluetooth'
       - '/etc/lsb_release:/etc/lsb_release'
       - '/var/data/public_keys:/var/data/public_keys'
 
