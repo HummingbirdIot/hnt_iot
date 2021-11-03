@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION=0.1
+VERSION=0.6
 SELF_NAME=`basename "$0"`
 
 function checkMinerDiskUsage()
@@ -48,8 +48,8 @@ function setupDbus() {
 
 function startHummingbird() {
   echo "Start hummingbird "
-  docker-compose up -d
   checkMinerDiskUsage
+  docker-compose up -d
 }
 
 function stopHummingbirdMiner() {
