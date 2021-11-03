@@ -28,9 +28,11 @@ gen_snapshot() {
 
 clean_miner() {
   echo "in clean miner"
+  docker stop ${dockerContainer}
   sudo rm -fr /var/data/state_channel.db
   sudo rm -fr /var/data/ledger.db
   sudo rm -fr /var/data/blockchain.db
+  docker start ${dockerContainer}
 }
 
 apply_snapshot() {
@@ -43,4 +45,4 @@ apply_snapshot() {
 }
 
 
-clean_miner && apply_snapshot
+clean_miner
