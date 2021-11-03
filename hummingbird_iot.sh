@@ -72,14 +72,13 @@ function checkOriginUpdate() {
     stopHummingbirdMiner
     if [[ -z "${HUMMINGBIRD_OTA}" ]]; then
       export HUMMINGBIRD_OTA="True"
-      echo "starting OTA"
+      echo sudo "starting OTA"
       git stash
       git merge '@{u}'
       chmod +x ${SELF_NAME}
       exec sudo ./${SELF_NAME}
     else
       echo "already in OTA just exit"
-      exit
     fi
  fi
 }
