@@ -2,6 +2,15 @@
 VERSION=0.1
 SELF_NAME=`basename "$0"`
 
+function checkMinerDiskUsage()
+{
+  usage=`df -h |grep '/dev/root' | awk '{print $5}' | tr -dc '0-9'`
+  if ((usage > 80)); then
+    echo "trim miner"
+    exec sudo ./trim_miner.sh
+  fi
+}
+
 function git_setup() {
   git config --global user.email "hummingbirdiot@example.com"
   git config --global user.name "hummingbirdiot"
@@ -64,6 +73,16 @@ function checkOriginUpdate() {
     git merge '@{u}'
     chmod +x ${SELF_NAME}
     exec sudo ./${SELF_NAME}
+  fi
+}
+
+miner_data_setup() {
+  if [[ -d "/var/data/miner" ]]
+  then
+    echo "miner folder already exist"
+  else
+    mkdir -p /tmp/miner
+    sudo mv /var/data /tmp/miner && sudo mkdir -p /var/data/ && sudo mv /tmp/miner /var/data
   fi
 }
 

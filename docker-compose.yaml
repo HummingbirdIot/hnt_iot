@@ -31,7 +31,7 @@ services:
         #  - "44158:44158/tcp"
     volumes:
       - '/var/run/dbus:/var/run/dbus'
-      - '/var/data:/var/data'
+      - '/var/data/miner:/var/data'
       - '/etc/lsb_release:/etc/lsb_release'
       - 'pktfwdr:/var/pktfwd'
       - './config/overlay/docker.config:/opt/miner/releases/2021.10.07.0/sys.config'
