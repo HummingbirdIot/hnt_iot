@@ -49,6 +49,7 @@ function setupDbus() {
 function startHummingbird() {
   echo "Start hummingbird "
   docker-compose up -d
+  checkMinerDiskUsage
 }
 
 function stopHummingbirdMiner() {
@@ -69,11 +70,18 @@ function checkOriginUpdate() {
   # stop docker-compose first
     echo "Do self update"
     stopHummingbirdMiner
-    git stash
-    git merge '@{u}'
-    chmod +x ${SELF_NAME}
-    exec sudo ./${SELF_NAME}
-  fi
+    if [[ -z "${HUMMINGBIRD_OTA}" ]]; then
+      export HUMMINGBIRD_OTA="True"
+      echo "starting OTA"
+      git stash
+      git merge '@{u}'
+      chmod +x ${SELF_NAME}
+      exec sudo ./${SELF_NAME}
+    else
+      echo "already in OTA just exit"
+      exit
+    fi
+ fi
 }
 
 miner_data_setup() {
@@ -81,6 +89,7 @@ miner_data_setup() {
   then
     echo "miner folder already exist"
   else
+    echo "do miner data migrate"
     mkdir -p /tmp/miner
     sudo mv /var/data /tmp/miner && sudo mkdir -p /var/data/ && sudo mv /tmp/miner /var/data
   fi
@@ -88,6 +97,7 @@ miner_data_setup() {
 
 echo ">>>>> hummingbirdiot start <<<<<<"
 echo ${SELF_NAME}
+miner_data_setup
 git_setup
 check_public_keyfile
 checkOriginUpdate
