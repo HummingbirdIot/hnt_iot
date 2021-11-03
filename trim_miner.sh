@@ -14,7 +14,9 @@ gen_snapshot() {
 
 
 clean_miner() {
-  rm -fr /var/data/miner
+  rm -fr /var/data/miner/state_channel.db
+  rm -fr /var/data/miner/ledger.db
+  rm -fr /var/data/miner/blockchain.db
 }
 
 apply_snapshot() {
