@@ -57,6 +57,8 @@ function stopHummingbirdMiner() {
   docker-compose down
 }
 
+OTA_STATUS_FILE="/tmp/hummingbird_ota"
+
 function checkOriginUpdate() {
   SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd)
 
@@ -65,38 +67,25 @@ function checkOriginUpdate() {
   HEADHASH=$(git rev-parse HEAD)
   UPSTREAMHASH=$(git rev-parse main@{upstream})
 
-  if [ "$HEADHASH" != "$UPSTREAMHASH" ]
-  then
+  if [ "$HEADHASH" != "$UPSTREAMHASH" ]; then
   # stop docker-compose first
-    echo "Do self update"
-    stopHummingbirdMiner
-    if [[ -z "${HUMMINGBIRD_OTA}" ]]; then
-      export HUMMINGBIRD_OTA="True"
+    if [ -f "$OTA_STATUS_FILE" ]; then
+      echo "already in ota"
+    else
+      echo "Do self update"
+      touch /tmp/hummingbird_ota
+      stopHummingbirdMiner
       echo sudo "starting OTA"
       git stash
       git merge '@{u}'
       chmod +x ${SELF_NAME}
       exec sudo ./${SELF_NAME}
-    else
-      echo "already in OTA just exit"
     fi
  fi
 }
 
-miner_data_setup() {
-  if [[ -d "/var/data/miner" ]]
-  then
-    echo "miner folder already exist"
-  else
-    echo "do miner data migrate"
-    mkdir -p /tmp/miner
-    sudo mv /var/data /tmp/miner && sudo mkdir -p /var/data/ && sudo mv /tmp/miner /var/data
-  fi
-}
-
 echo ">>>>> hummingbirdiot start <<<<<<"
 echo ${SELF_NAME}
-miner_data_setup
 git_setup
 check_public_keyfile
 checkOriginUpdate
@@ -105,3 +94,4 @@ rfkill unblock all
 update_release_version
 setupDbus
 startHummingbird
+rm -f ${OTA_STATUS_FILE}
