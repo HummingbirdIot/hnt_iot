@@ -64,9 +64,12 @@ function checkOriginUpdate() {
 
   git fetch
 
+  CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD)
   HEADHASH=$(git rev-parse HEAD)
-  UPSTREAMHASH=$(git rev-parse main@{upstream})
+  UPSTREAMHASH=$(git rev-parse ${CURRENTBRANCH}@{upstream})
 
+  echo ${UPSTREAMHASH}
+  exit 0
   if [ "$HEADHASH" != "$UPSTREAMHASH" ]; then
   # stop docker-compose first
     if [ -f "$OTA_STATUS_FILE" ]; then
