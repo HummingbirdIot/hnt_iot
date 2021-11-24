@@ -90,7 +90,7 @@ function checkOriginUpdate() {
 echo ">>>>> hummingbirdiot start <<<<<<"
 echo ${SELF_NAME}
 git_setup
-check_public_keyfile
+#check_public_keyfile
 checkOriginUpdate
 # unblock rfkill
 rfkill unblock all
