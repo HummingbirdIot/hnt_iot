@@ -16,7 +16,7 @@ This guide will show how to enable 4G for Hummingbird H500
 
 * screw driver
 
-* pppd-mgr(download from this repository) [download](./tools/pppd-mgr-3.0.0.deb)
+* pppd-mgr(download from this repository) [download](../tools/pppd-mgr-3.0.0.deb)
 
   
 
