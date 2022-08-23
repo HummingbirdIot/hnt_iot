@@ -8,7 +8,7 @@ This guide will show how to enable 4G for Hummingbird H500
 
 * 4G model(e.g EC20) 
 
-  ![ec20](../images/ec20.jpg)
+  ![ec20](./images/ec20.jpg)
 
 * SIM card
 
