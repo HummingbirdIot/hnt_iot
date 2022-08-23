@@ -26,7 +26,7 @@ This guide will show how to enable 4G for Hummingbird H500
 * Get h500 PCBA from Case
 * Plug 4G modem(i.e. EC20) to H500 PCIE slot
 
-![h500_4g](./images/h500_4g.jpg)
+![h500_4g](./images/h500_4G.jpg)
 
 
 
